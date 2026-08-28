@@ -1,20 +1,20 @@
 @font-face {
 font-family: "Fraunces";
-src: url("/assets/fonts/fraunces-var.woff2") format("woff2-variations");
+src: url("/spaceailabs/assets/fonts/fraunces-var.woff2") format("woff2-variations");
 font-weight: 300 700;
 font-style: normal;
 font-display: swap;
 }
 @font-face {
 font-family: "Instrument Sans";
-src: url("/assets/fonts/instrument-var.woff2") format("woff2-variations");
+src: url("/spaceailabs/assets/fonts/instrument-var.woff2") format("woff2-variations");
 font-weight: 400 700;
 font-style: normal;
 font-display: swap;
 }
 @font-face {
 font-family: "JetBrains Mono";
-src: url("/assets/fonts/jetbrains-var.woff2") format("woff2-variations");
+src: url("/spaceailabs/assets/fonts/jetbrains-var.woff2") format("woff2-variations");
 font-weight: 400 700;
 font-style: normal;
 font-display: swap;

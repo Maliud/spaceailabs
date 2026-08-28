@@ -57,6 +57,21 @@ const site = json('site.json');
 const LOCALES = ['en', 'tr'];
 const DEFAULT_LOCALE = 'en';
 
+/* Until the domain is cut over from Hostinger, the site is published to
+   https://maliud.github.io/spaceailabs/ so it can be reviewed without
+   touching DNS or company email. That preview lives under a sub-path;
+   the real site will not.
+
+     preview   BASE=/spaceailabs node src/build.mjs
+     live      node src/build.mjs        (plus a CNAME file)
+
+   BASE only affects *emitted* paths. `site` stays on the final domain
+   throughout, because canonical, hreflang and the sitemap must always
+   advertise where the site really lives — a preview build must never
+   teach a crawler that the sub-path is home. */
+const BASE = (process.env.BASE || '').replace(/\/$/, '');
+const href = (path) => (BASE && path.startsWith('/') ? BASE + path : path);
+
 /* ─── Helpers ─────────────────────────────────────────────────────── */
 
 const esc = (s) =>
@@ -140,7 +155,7 @@ const blocks = {
         <h1 class="display">${inline(t(b.h1, L, ctx))}</h1>
         <p class="lead">${inline(t(b.lead, L, ctx))}</p>
         ${(b.links || []).map((l) =>
-          `<a class="cta" href="${esc(t(l.href, L, ctx))}">${esc(t(l.label, L, ctx))}</a>`).join('\n        ')}
+          `<a class="cta" href="${esc(href(t(l.href, L, ctx)))}">${esc(t(l.label, L, ctx))}</a>`).join('\n        ')}
       </div>
       ${b.spec ? `<aside class="col-margin spec" aria-label="${esc(t(b.specLabel || 'Facts', L, ctx))}">
         <dl>${b.spec.map((r) =>
@@ -269,9 +284,9 @@ function head(page, L) {
   <meta property="og:locale:alternate" content="${L === 'tr' ? 'en_US' : 'tr_TR'}">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preload" href="/assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/instrument-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="preload" href="${href('/assets/fonts/fraunces-var.woff2')}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="${href('/assets/fonts/instrument-var.woff2')}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="${href('/assets/css/site.css')}">
 </head>`;
 }
 
@@ -282,21 +297,21 @@ const MARK = `<svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor">
 
 function nav(page, L) {
   const items = site.nav.map((id) => {
-    const href = site.routes[id][L];
+    const to = href(site.routes[id][L]);
     const label = esc(t(site.labels[id], L, `nav.${id}`));
     const current = id === page.id ? ' aria-current="page"' : '';
-    return `<a href="${href}"${current}>${label}</a>`;
+    return `<a href="${to}"${current}>${label}</a>`;
   }).join('\n        ');
 
   const other = L === 'en' ? 'tr' : 'en';
-  const otherHref = site.routes[page.id][other];
+  const otherHref = href(site.routes[page.id][other]);
 
   return `
 <body>
   <a class="skip" href="#main">${L === 'tr' ? 'İçeriğe geç' : 'Skip to content'}</a>
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="${site.routes.home[L]}">${MARK}SPACE AI LABS</a>
+      <a class="brand" href="${href(site.routes.home[L])}">${MARK}SPACE AI LABS</a>
       <nav class="nav-links" aria-label="${L === 'tr' ? 'Ana menü' : 'Primary'}">
         ${items}
         <a class="lang" href="${otherHref}" hreflang="${other}" lang="${other}" rel="alternate">${other === 'tr' ? 'TÜRKÇE' : 'ENGLISH'}</a>
@@ -312,7 +327,7 @@ function footer(L) {
         <div>
           <h4>${esc(t(site.labels[key], L, `footer.${key}`))}</h4>
           <ul>${ids.map((id) =>
-            `<li><a href="${site.routes[id][L]}">${esc(t(site.labels[id], L, id))}</a></li>`).join('')}</ul>
+            `<li><a href="${href(site.routes[id][L])}">${esc(t(site.labels[id], L, id))}</a></li>`).join('')}</ul>
         </div>`;
 
   return `
@@ -357,7 +372,8 @@ function buildCss() {
     .map((f) => readFileSync(join(dir, f), 'utf8')).join('\n');
   // Comments are the documentation for the design decisions; they stay
   // in the source and are stripped only from the served file.
-  const min = css
+  const based = BASE ? css.replace(/url\("\/assets\//g, `url("${BASE}/assets/`) : css;
+  const min = based
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/\s*\n\s*/g, '\n')
     .replace(/\n{2,}/g, '\n')
