@@ -1,0 +1,182 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SPACE AI LABS — design tokens
+   ═══════════════════════════════════════════════════════════════════
+
+   The parent brand deliberately carries NO chromatic accent.
+
+   Colour belongs to the products: ChartMind is chartreuse on black,
+   Styvora is violet on cream, and neither can be flattened into a
+   shared palette without wrecking one of them. So the company layer is
+   paper and ink only, and interactive state is carried by underline and
+   ink weight rather than hue. Chroma appears at parent level in exactly
+   one device — `.split-rule`, a hard-butted half-chartreuse
+   half-violet line used three times site-wide.
+
+   Product pages opt in with `data-brand` on <html>, which remaps SIX
+   variables and nothing else. Same type, same grid, same spacing, same
+   radii. The nav and footer always stay parent paper/ink, so a dark
+   ChartMind page visibly sits inside the parent frame.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Fonts ────────────────────────────────────────────────────────
+   Subset + axis-pinned by src/tools/subset-fonts.sh. Fraunces has
+   WONK=1 and opsz=144 baked in — the flared, slightly hand-cut
+   letterforms are the point, not an option to toggle at runtime. */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/fraunces-var.woff2") format("woff2-variations");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("/assets/fonts/instrument-var.woff2") format("woff2-variations");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/jetbrains-var.woff2") format("woff2-variations");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metric-matched fallbacks. Without these the swap from Georgia to
+   Fraunces reflows every headline and CLS stops being zero. */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Georgia"), local("Times New Roman");
+  size-adjust: 104%;
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Instrument Fallback";
+  src: local("Helvetica Neue"), local("Arial");
+  size-adjust: 100%;
+  ascent-override: 96%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+:root {
+  /* ─── Parent palette ─────────────────────────────────────────────
+     Paper is greyer than Styvora's cream (#F4EFE3) on purpose, so the
+     company layer reads as the parent rather than as Styvora.
+     Ink carries a faint warm-green cast, which bridges ChartMind's
+     #0A0A0A and Styvora's #14110D. */
+  --sal-paper:      #EFEBE2;
+  --sal-paper-2:    #E4DFD3;
+  --sal-paper-line: #D3CDBF;
+  --sal-ink:        #0E100C;
+  --sal-ink-2:      #171A15;
+  --sal-ink-line:   #262A23;
+
+  --sal-text-hi:    #0E100C;
+  --sal-text-lo:    #57604F;   /* 5.6:1 on paper — AA body text */
+  --sal-invert-hi:  #F2F1EC;
+  --sal-invert-lo:  #9BA096;   /* 8.0:1 on ink */
+
+  /* The two product accents, used ONLY inside .split-rule at parent
+     level. Never as parent link or button colour. */
+  --sal-chartreuse: #7FFF00;
+  --sal-violet:     #6C5CE7;
+
+  /* ─── Themed surface set (what components actually read) ──────── */
+  --surface:    var(--sal-paper);
+  --surface-2:  var(--sal-paper-2);
+  --line:       var(--sal-paper-line);
+  --text-hi:    var(--sal-text-hi);
+  --text-lo:    var(--sal-text-lo);
+  --accent:     var(--sal-text-hi);   /* parent: no hue */
+
+  /* ─── Type ───────────────────────────────────────────────────────
+     Fraunces = argument. Instrument Sans = explanation.
+     JetBrains Mono = verifiable fact — if a value can be looked up (a
+     price, a version, a Team ID, a MERSİS number) it is set in mono.
+     That makes the typography semantic instead of decorative. */
+  --serif: "Fraunces", "Fraunces Fallback", Georgia, serif;
+  --sans:  "Instrument Sans", "Instrument Fallback", -apple-system,
+           BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Display weight is 400, not 700: a large light serif reads as
+     designed, a large bold serif reads as a template. The 68→104 jump
+     is wider than the rest of the scale on purpose — a perfectly
+     uniform ratio is a generator's fingerprint. */
+  --t-display: clamp(44px, 7.2vw, 104px);
+  --t-h1:      clamp(36px, 5.0vw, 68px);
+  --t-h2:      clamp(28px, 3.4vw, 44px);
+  --t-h3:      22px;
+  --t-h4:      17px;
+  --t-lead:    20px;
+  --t-body:    17px;
+  --t-small:   14.5px;
+  --t-mono:    12px;
+  --t-data:    15px;
+
+  /* ─── Spacing: two tracks ────────────────────────────────────────
+     A regular 4px track for components, and a deliberately irregular
+     editorial track for section rhythm. 152 and 240 break the ratio;
+     even vertical rhythm down a whole page is one of the clearest
+     generated-design tells. */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+  --s-5: 20px;  --s-6: 24px;  --s-8: 32px;
+
+  --e-1: 40px;  --e-2: 64px;  --e-3: 96px;  --e-4: 152px; --e-5: 240px;
+
+  /* ─── Grid ───────────────────────────────────────────────────────
+     Default content column is 2–8 of 12: off-axis, leaving 10–12 free
+     for mono marginalia. This single decision does more anti-template
+     work than any other layout choice. */
+  --wrap:   1240px;
+  --gutter: 24px;
+  --col-gap: 24px;
+
+  /* ─── Radius: near zero ──────────────────────────────────────────
+     Sharp corners + hairlines read as print. Rounded corners + soft
+     shadow read as a Tailwind starter. */
+  --r-0: 0;      --r-1: 2px;   --r-2: 6px;
+  --r-pill: 999px;
+  --r-device: 44px;            /* real hardware corner radius */
+
+  /* ─── Motion ─────────────────────────────────────────────────────
+     Two primitives, applied to type and rules only. Cards, images and
+     body copy never animate in — they are simply there. */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --d-reveal: 520ms;
+  --d-rule:   700ms;
+  --d-hover:  120ms;
+}
+
+/* ─── Product themes ───────────────────────────────────────────────
+   Verified against the apps' own token files, not invented:
+   ChartMind  mobile/lib/app/themes/app_theme.dart
+   Styvora    mobile/lib/design_system/tokens/styvora_colors.dart */
+
+[data-brand="chartmind"] {
+  --surface:   #0A0A0A;
+  --surface-2: #1A1A1A;
+  --line:      #3A3A3A;
+  --text-hi:   #FFFFFF;
+  --text-lo:   #B0B0B0;
+  --accent:    #7FFF00;
+}
+
+[data-brand="styvora"] {
+  --surface:   #F4EFE3;
+  --surface-2: #FBF7EB;
+  --line:      rgba(20, 17, 13, .16);
+  --text-hi:   #14110D;
+  --text-lo:   #5B544A;
+  /* #6C5CE7 on cream is ~4.6:1 — marginal. Text and links use the
+     deeper #4A3FB0; the lighter violet is for fills only. This is the
+     same split the live Styvora landing already makes. */
+  --accent:    #4A3FB0;
+  --accent-fill: #6C5CE7;
+}

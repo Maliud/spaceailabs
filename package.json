@@ -1,0 +1,18 @@
+{
+  "name": "spaceailabs-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Space AI Labs corporate website — spaceailabs.ai",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.2.9",
+    "sharp": "^0.35.4"
+  }
+}

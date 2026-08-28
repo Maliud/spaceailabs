@@ -1,0 +1,154 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Layout — grid, sections, nav, footer, the split rule
+   ═══════════════════════════════════════════════════════════════════ */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* 12 columns. The default text column is 2–8, not 1–7 and not centred:
+   off-axis, with 10–12 left live for mono marginalia. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--col-gap);
+}
+.col-main   { grid-column: 2 / 9; }
+.col-margin { grid-column: 10 / 13; }
+.col-wide   { grid-column: 1 / 9; }
+.col-full   { grid-column: 1 / -1; }
+
+@media (max-width: 1023px) {
+  .col-main, .col-wide, .col-margin, .col-full { grid-column: 1 / -1; }
+  /* Marginalia moves inline; it is never hidden. Dropping content at
+     small sizes is how "responsive" becomes "desktop-only, stacked". */
+  .col-margin { margin-top: var(--s-8); }
+}
+
+@media (max-width: 767px) {
+  :root { --gutter: 20px; }
+}
+
+/* Section rhythm uses the editorial track (40/64/96/152/240). */
+.section    { padding-block: var(--e-3); }
+.section-lg { padding-block: var(--e-4); }
+.section-xl { padding-block: var(--e-5); }
+.section-sm { padding-block: var(--e-2); }
+
+.band {
+  background: var(--surface);
+  color: var(--text-hi);
+}
+.band-2 { background: var(--surface-2); }
+
+/* ─── The split rule ────────────────────────────────────────────────
+   One company, two products, stated graphically: half chartreuse, half
+   violet, butt-joined with a hard edge and no blend. The hard edge is
+   the whole point — it is the anti-gradient. Used exactly three times
+   site-wide (under the hero, above the footer, on the press masthead);
+   scarcity is what makes it a signature rather than decoration. */
+.split-rule {
+  height: 3px;
+  width: 100%;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    var(--sal-chartreuse) 0 50%,
+    var(--sal-violet)     50% 100%
+  );
+}
+
+/* ─── Nav ───────────────────────────────────────────────────────────
+   Solid, never frosted. No CTA button: a nav CTA is a template tell,
+   and this company has nothing urgent to sell from a header.
+   The frame stays parent paper/ink on every page, including dark
+   product pages — the parent visibly holds the product. */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--sal-paper);
+  color: var(--sal-text-hi);
+  border-bottom: 1px solid transparent;
+}
+.nav[data-scrolled] { border-bottom-color: var(--sal-paper-line); }
+
+.nav-inner {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-6);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .10em;
+  color: var(--sal-text-hi);
+}
+.brand svg { width: 20px; height: 20px; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+  font-size: var(--t-small);
+}
+.nav-links a { text-decoration: none; color: var(--sal-text-lo); }
+.nav-links a:hover { color: var(--sal-text-hi); }
+.nav-links a[aria-current="page"] {
+  color: var(--sal-text-hi);
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+}
+
+.lang {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  border: 1px solid var(--sal-paper-line);
+  border-radius: var(--r-pill);
+  padding: 5px 12px;
+  text-decoration: none;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .nav-links { gap: var(--s-4); font-size: 13px; }
+  .nav-links .nav-hide-sm { display: none; }
+}
+
+/* ─── Footer ────────────────────────────────────────────────────────
+   Also always parent paper, whatever the page's brand. */
+.footer {
+  background: var(--sal-paper-2);
+  color: var(--sal-text-hi);
+  padding-block: var(--e-2) var(--e-1);
+}
+.footer a { color: var(--sal-text-lo); text-decoration: none; }
+.footer a:hover { color: var(--sal-text-hi); text-decoration: underline; }
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--s-8);
+}
+.footer-cols h4 { margin-bottom: var(--s-3); }
+.footer-cols ul { list-style: none; padding: 0; display: grid; gap: var(--s-2); }
+.footer-legal {
+  margin-top: var(--e-1);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--sal-paper-line);
+  color: var(--sal-text-lo);
+}

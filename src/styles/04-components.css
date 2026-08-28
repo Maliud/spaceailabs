@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Components
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Display headline ──────────────────────────────────────────────
+   The one place the type goes large. Weight 400 at 104px: a large
+   light serif reads as designed, a large bold serif reads as generic.
+   Fraunces ships here with WONK=1 baked into the subset — the flared,
+   slightly hand-cut letterforms that a generated design never has,
+   because generated designs never touch a variable font's optional
+   axes. */
+.display {
+  font-size: var(--t-display);
+  line-height: .94;
+  letter-spacing: -.03em;
+  font-weight: 400;
+  max-width: 14ch;
+}
+@media (max-width: 767px) { .display { max-width: none; } }
+
+/* Turkish runs 15–20% longer than English; without a cap the hero
+   headline wraps to five lines on a phone. */
+:lang(tr) .display { font-size: clamp(40px, 6.4vw, 88px); }
+
+.lead { margin-top: var(--s-6); color: var(--text-lo); }
+
+/* ─── CTAs are links, not buttons ───────────────────────────────────
+   A pair of filled buttons under a hero is the single most template-
+   like element on the web. These are text with a rule under them. */
+.cta {
+  display: inline-block;
+  margin-top: var(--e-1);
+  margin-right: var(--s-8);
+  font-family: var(--sans);
+  font-size: var(--t-h4);
+  font-weight: 600;
+  text-decoration: none;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--accent);
+  min-height: 24px;
+}
+.cta:hover { border-bottom-color: var(--text-hi); }
+
+/* ─── Hero spec block ───────────────────────────────────────────────
+   Six label/value rows in mono. Publishing TEAM 1 in the hero is the
+   positioning compressed into one row: it answers the scale question
+   before a visitor can ask it, and it is a row a 100-person competitor
+   cannot write. */
+.spec dl { display: grid; gap: var(--s-3); margin: 0; }
+.spec dl > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s-4);
+  align-items: baseline;
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+.spec dt { margin: 0; }
+.spec dd { margin: 0; color: var(--text-hi); }
+
+/* ─── Question + answer ─────────────────────────────────────────────
+   The answer paragraph is the unit a retrieval system lifts out of the
+   page, so it is set slightly larger than body copy and sits directly
+   under the question with nothing between them. */
+.answer {
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  margin-top: var(--s-6);
+  max-width: 56ch;
+}
+.answer + p { margin-top: var(--s-6); }
+.qa p + p { margin-top: var(--s-5); }
+section p + p { margin-top: var(--s-5); }
+h2 + .answer { margin-top: var(--s-5); }
+
+/* ─── Facts table ───────────────────────────────────────────────────
+   Registry numbers, in mono, in a plain table. Deliberately unglamorous:
+   the persuasion comes from the fact that every row is falsifiable. */
+.facts {
+  width: 100%;
+  margin-top: var(--e-1);
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.facts th, .facts td {
+  text-align: left;
+  vertical-align: baseline;
+  padding: var(--s-4) var(--s-4) var(--s-4) 0;
+  border-top: 1px solid var(--line);
+}
+.facts th { font-weight: 600; white-space: nowrap; width: 1%; }
+.facts .verify { color: var(--text-lo); font-family: var(--mono); font-size: var(--t-mono); }
+
+@media (max-width: 767px) {
+  .facts, .facts tbody, .facts tr, .facts th, .facts td { display: block; width: auto; }
+  .facts th { border-top: 1px solid var(--line); padding-bottom: var(--s-1); }
+  .facts td { padding-top: 0; border-top: 0; }
+  .facts .verify { padding-bottom: var(--s-5); }
+}
+
+/* ─── Ship log ──────────────────────────────────────────────────────
+   No cards, no icons: a date and a line. Evidence of motion is the
+   honest substitute for evidence of scale. */
+.log { list-style: none; padding: 0; margin-top: var(--e-1); }
+.log li {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: var(--s-6);
+  align-items: baseline;
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--line);
+}
+.log li:last-child { border-bottom: 1px solid var(--line); }
+.log .mono { color: var(--text-lo); }
+
+@media (max-width: 559px) {
+  .log li { grid-template-columns: 1fr; gap: var(--s-1); }
+}
+
+/* ─── Marginalia ────────────────────────────────────────────────────
+   The right-hand column that keeps the layout off-axis. On narrow
+   screens it moves inline rather than disappearing. */
+aside.mono {
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-3);
+  line-height: 1.6;
+}
+
+/* ─── Motion: two primitives, type and rules only ───────────────────
+   Cards, images and body copy never animate in — they are simply
+   there. That restraint is the loudest confidence signal available,
+   and the exact opposite of the "everything fades up 20px" pattern
+   that identifies a generated site instantly.
+
+   Both are declarative (animation-timeline), so they need no JS and
+   honour prefers-reduced-motion natively. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    h1, h2 {
+      animation: mask-reveal var(--d-reveal) var(--ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 26%;
+    }
+    .split-rule {
+      animation: hairline-draw var(--d-rule) linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 18%;
+      transform-origin: left center;
+    }
+  }
+}
+@keyframes mask-reveal {
+  from { clip-path: inset(0 0 100% 0); opacity: 0; }
+  to   { clip-path: inset(0 0 -10% 0); opacity: 1; }
+}
+@keyframes hairline-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}

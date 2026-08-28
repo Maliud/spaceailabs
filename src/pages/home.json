@@ -1,0 +1,157 @@
+{
+  "id": "home",
+  "brand": "parent",
+
+  "title": {
+    "en": "SPACE AI LABS — AI apps built in the open",
+    "tr": "SPACE AI LABS — açık şekilde geliştirilen AI uygulamaları"
+  },
+  "description": {
+    "en": "SPACE AI LABS is an Istanbul software studio building AI mobile apps. ChartMind reads trading charts; Styvora styles you from your own wardrobe.",
+    "tr": "SPACE AI LABS, İstanbul merkezli bir yazılım stüdyosu. ChartMind grafik okur, Styvora kendi gardırobunuzdan kombin kurar. İki ürün, tek stüdyo."
+  },
+
+  "blocks": [
+    {
+      "type": "hero",
+      "kicker": { "en": "ISTANBUL · SOFTWARE STUDIO", "tr": "İSTANBUL · YAZILIM STÜDYOSU" },
+      "h1": {
+        "en": "Two apps. Built deeper than they need to be.",
+        "tr": "İki uygulama. Gereğinden derin yapıldı."
+      },
+      "lead": {
+        "en": "SPACE AI LABS builds and runs its own AI products. Every claim on this page points at something you can open and check — a store listing, a company registry, or the app itself.",
+        "tr": "SPACE AI LABS kendi AI ürünlerini geliştirir ve işletir. Bu sayfadaki her iddia, açıp bakabileceğiniz bir şeye dayanır: bir mağaza sayfası, bir sicil kaydı ya da uygulamanın kendisi."
+      },
+      "links": [
+        { "label": { "en": "ChartMind →", "tr": "ChartMind →" }, "href": { "en": "/products/chartmind/", "tr": "/tr/urunler/chartmind/" } },
+        { "label": { "en": "Styvora →", "tr": "Styvora →" }, "href": { "en": "/products/styvora/", "tr": "/tr/urunler/styvora/" } }
+      ],
+      "specLabel": { "en": "Studio facts", "tr": "Stüdyo künyesi" },
+      "spec": [
+        { "k": { "en": "STUDIO",    "tr": "STÜDYO" },   "v": "İstanbul" },
+        { "k": { "en": "PRODUCTS",  "tr": "ÜRÜN" },     "v": "2" },
+        { "k": { "en": "LIVE",      "tr": "YAYINDA" },  "v": "1" },
+        { "k": { "en": "LANGUAGES", "tr": "DİL" },      "v": "39 + 8" },
+        { "k": { "en": "FOUNDED",   "tr": "KURULUŞ" },  "v": "2026" },
+        { "k": { "en": "TEAM",      "tr": "EKİP" },     "v": "1" }
+      ]
+    },
+
+    {
+      "type": "qa",
+      "q": { "en": "What does SPACE AI LABS build?", "tr": "SPACE AI LABS ne yapar?" },
+      "a": {
+        "en": "SPACE AI LABS builds AI-powered mobile apps and runs them end to end — product, backend, models and store operations. Two products exist today: ChartMind, live on the App Store and Google Play, and Styvora, in App Store review.",
+        "tr": "SPACE AI LABS, yapay zekâ destekli mobil uygulamalar geliştirir ve baştan sona kendisi işletir: ürün, sunucu tarafı, modeller ve mağaza operasyonu. Bugün iki ürün var: yayında olan ChartMind ve inceleme aşamasındaki Styvora."
+      },
+      "body": [
+        {
+          "en": "The studio is one person. That is stated up front because it changes what you should expect: no account manager, no roadmap theatre, and a very short line between noticing a problem and shipping the fix.",
+          "tr": "Stüdyo tek kişi. Bunu baştan yazıyoruz çünkü beklentiyi değiştirir: müşteri temsilcisi yok, yol haritası tiyatrosu yok, bir sorunu fark etmekle düzeltmeyi yayınlamak arasındaki mesafe çok kısa."
+        }
+      ],
+      "note": { "en": "ONE STUDIO · TWO CODEBASES", "tr": "TEK STÜDYO · İKİ KOD TABANI" }
+    },
+
+    {
+      "type": "qa",
+      "q": {
+        "en": "What does supporting 39 languages actually cost?",
+        "tr": "39 dili gerçekten desteklemek ne demek?"
+      },
+      "a": {
+        "en": "ChartMind ships in 39 languages, including Arabic and Hebrew with full right-to-left layout. Real localisation changes the typography, not just the strings: Arabic is cursive, so letter-spacing breaks the joins and emphasis has to move from italic to weight.",
+        "tr": "ChartMind 39 dilde yayında; Arapça ve İbranice tam sağdan-sola düzenle. Gerçek yerelleştirme yalnız metinleri değil tipografiyi de değiştirir: Arapça bitişik yazılır, harf aralığı bağları koparır ve vurgu italikten kalınlığa taşınmak zorundadır."
+      },
+      "body": [
+        {
+          "en": "Most apps translate a string file and call it localisation. The part nobody checks is what happens to layout, numerals, date order and text direction — and that is the part that decides whether the app feels native or merely available.",
+          "tr": "Çoğu uygulama bir metin dosyasını çevirip işi bitmiş sayar. Kimsenin bakmadığı kısım düzenin, rakamların, tarih sırasının ve yazı yönünün ne olduğudur — ve uygulamanın o dilde yerli mi yoksa sadece mevcut mu hissettirdiğini o kısım belirler."
+        }
+      ]
+    },
+
+    {
+      "type": "facts",
+      "h2": { "en": "You can look us up.", "tr": "Bizi kayıtlardan doğrulayabilirsiniz." },
+      "a": {
+        "en": "SPACE AI LABS YAZILIM HİZMETLERİ LİMİTED ŞİRKETİ is a Turkish limited company registered in İstanbul. Its registry number, tax number and Apple developer identity are published below so any claim on this site can be checked against a public record.",
+        "tr": "SPACE AI LABS YAZILIM HİZMETLERİ LİMİTED ŞİRKETİ, İstanbul'da kayıtlı bir limited şirkettir. Sicil numarası, vergi numarası ve Apple geliştirici kimliği aşağıda yayımlanıyor; böylece sitedeki her iddia bir kamu kaydıyla karşılaştırılabilir."
+      },
+      "rows": [
+        {
+          "k": { "en": "LEGAL ENTITY", "tr": "UNVAN" },
+          "v": "SPACE AI LABS YAZILIM HİZMETLERİ LİMİTED ŞİRKETİ",
+          "verify": { "en": "MERSİS 0781115292100001", "tr": "MERSİS 0781115292100001" }
+        },
+        {
+          "k": { "en": "TAX NUMBER", "tr": "VERGİ NO" },
+          "v": "VKN 7811152921",
+          "verify": { "en": "Türkiye", "tr": "Türkiye" }
+        },
+        {
+          "k": { "en": "APPLE DEVELOPER", "tr": "APPLE GELİŞTİRİCİ" },
+          "v": "Team ID 49CT3A6XH8",
+          "verify": { "en": "App Store seller name matches", "tr": "App Store satıcı adıyla eşleşir" }
+        },
+        {
+          "k": { "en": "REGISTERED OFFICE", "tr": "KAYITLI ADRES" },
+          "v": "Batışehir K Blok No: 2/2, Bağcılar",
+          "verify": { "en": "İstanbul, Türkiye", "tr": "İstanbul, Türkiye" }
+        }
+      ]
+    },
+
+    {
+      "type": "log",
+      "h2": { "en": "What we shipped recently", "tr": "Son yayınladıklarımız" },
+      "entries": [
+        {
+          "date": "2026-08",
+          "text": {
+            "en": "Retired the free trial on both stores. It converted well and charged people who forgot.",
+            "tr": "İki mağazada da ücretsiz denemeyi kaldırdık. Dönüşümü iyiydi ama unutan kullanıcıdan ücret alıyordu."
+          }
+        },
+        {
+          "date": "2026-08",
+          "text": {
+            "en": "Added paging alerts on AI provider credit, so a provider outage cannot go unnoticed again.",
+            "tr": "AI sağlayıcı kredisi için alarm kurduk; bir sağlayıcı kesintisi bir daha fark edilmeden geçemez."
+          }
+        },
+        {
+          "date": "2026-08",
+          "text": {
+            "en": "Submitted Styvora build 1.0.0 (184) to App Store review.",
+            "tr": "Styvora 1.0.0 (184) sürümünü App Store incelemesine gönderdik."
+          }
+        },
+        {
+          "date": "2026-07",
+          "text": {
+            "en": "Moved ChartMind to the Finance category and rebuilt its store listing in 33 languages.",
+            "tr": "ChartMind'ı Finans kategorisine taşıdık ve mağaza sayfasını 33 dilde yeniden yazdık."
+          }
+        }
+      ]
+    },
+
+    {
+      "type": "prose",
+      "tone": "muted",
+      "h2": { "en": "What we don't have", "tr": "Bizde olmayanlar" },
+      "paras": [
+        {
+          "en": "No office photos, because there is no office. No customer logos, because we sell to people, not companies. No download counter, because ours is small and inflating it would break the one rule this studio actually has.",
+          "tr": "Ofis fotoğrafı yok, çünkü ofis yok. Müşteri logosu yok, çünkü şirketlere değil insanlara satıyoruz. İndirme sayacı yok, çünkü sayımız küçük ve onu şişirmek bu stüdyonun tek gerçek kuralını çiğnemek olurdu."
+        },
+        {
+          "en": "What there is instead: two codebases, two store listings, and products you can judge by their output rather than by a number on a marketing page.",
+          "tr": "Bunların yerine şunlar var: iki kod tabanı, iki mağaza sayfası ve bir pazarlama sayfasındaki sayıya değil, kendi çıktısına bakarak değerlendirebileceğiniz ürünler."
+        }
+      ]
+    }
+  ]
+}

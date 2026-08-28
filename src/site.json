@@ -1,0 +1,44 @@
+{
+  "site": "https://spaceailabs.ai",
+  "year": 2026,
+
+  "org": {
+    "legalName": "SPACE AI LABS YAZILIM HİZMETLERİ LİMİTED ŞİRKETİ",
+    "shortName": "SPACE AI LABS",
+    "address": "Göztepe Mah. Batışehir Cad. Batışehir K Blok No: 2/2, İç Kapı No: 115, Bağcılar/İstanbul, Türkiye",
+    "mersis": "0781115292100001",
+    "vkn": "7811152921",
+    "appleTeamId": "49CT3A6XH8",
+    "email": "support@spaceailabs.ai",
+    "privacyEmail": "privacy@spaceailabs.ai",
+    "founded": "2026",
+    "sameAs": [
+      "https://apps.apple.com/app/id6759520830",
+      "https://play.google.com/store/apps/details?id=ai.spaceailabs.chartgpt",
+      "https://chartmind.space/",
+      "https://styvora.space/"
+    ]
+  },
+
+  "routes": {
+    "home":       { "en": "/",                      "tr": "/tr/" },
+    "chartmind":  { "en": "/products/chartmind/",   "tr": "/tr/urunler/chartmind/" },
+    "styvora":    { "en": "/products/styvora/",     "tr": "/tr/urunler/styvora/" },
+    "technology": { "en": "/technology/",           "tr": "/tr/teknoloji/" },
+    "careers":    { "en": "/careers/",              "tr": "/tr/kariyer/" },
+    "press":      { "en": "/press/",                "tr": "/tr/basin/" }
+  },
+
+  "nav": ["chartmind", "styvora", "technology", "careers", "press"],
+
+  "labels": {
+    "home":       { "en": "Home",        "tr": "Ana sayfa" },
+    "chartmind":  { "en": "ChartMind",   "tr": "ChartMind" },
+    "styvora":    { "en": "Styvora",     "tr": "Styvora" },
+    "technology": { "en": "Technology",  "tr": "Teknoloji" },
+    "careers":    { "en": "Careers",     "tr": "Kariyer" },
+    "press":      { "en": "Press",       "tr": "Basın" },
+    "products":   { "en": "Products",    "tr": "Ürünler" },
+    "company":    { "en": "Company",     "tr": "Şirket" }
+  }
+}
