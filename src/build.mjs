@@ -189,10 +189,32 @@ const blocks = {
   </section>`;
   },
 
-  /* The look-us-up table: legal entity, registry numbers, Apple Team
-     ID. No generated marketing page puts a company registry number near
-     the top, because generated pages optimise for impressiveness and
-     this optimises for falsifiability. */
+  /* Two full-bleed product bands, each rendered in its own product's
+     environment — ChartMind dark/chartreuse, Styvora cream/violet — so
+     the visitor sees the two worlds before reading a word.
+     Deliberately NOT two equal cards side by side: unequal heights and
+     mirrored composition are what stop this reading as a template. */
+  products: (b, L, ctx) => b.items.map((it, i) => `
+  <section class="pband" data-brand="${it.brand}" data-side="${i % 2 ? 'right' : 'left'}">
+    <div class="wrap grid">
+      <div class="col-main pband-copy">
+        <p class="mono pband-status">
+          <span class="pband-index">${esc(it.index)}</span>
+          <span class="pband-dot" aria-hidden="true"></span>
+          ${esc(t(it.status, L, ctx))}
+        </p>
+        <h2>${inline(t(it.h, L, ctx))}</h2>
+        <p>${inline(t(it.p, L, ctx))}</p>
+        <a class="cta" href="${esc(href(t(it.href, L, ctx)))}">${esc(t(it.cta, L, ctx))} <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>`).join('\n'),
+
+  /* Kept for the company/legal page: the registry table. It is
+     deliberately NOT on the home page — neither codeway.co nor
+     appnation.co publishes tax or registry numbers on their front
+     page, and the Turkish disclosure duty is satisfied by a linked
+     company page, which is exactly what Codeway does. */
   facts: (b, L, ctx) => `
   <section class="section band band-2">
     <div class="wrap">
@@ -340,10 +362,9 @@ function footer(L) {
         ${col('company', ['technology', 'careers', 'press'])}
       </div>
       <p class="footer-legal data">
-        © ${site.year} ${esc(org.legalName)}<br>
-        ${esc(org.address)}<br>
-        MERSİS ${esc(org.mersis)} · VKN ${esc(org.vkn)} ·
-        <a href="mailto:${esc(org.email)}">${esc(org.email)}</a>
+        © ${site.year} ${esc(org.shortName)} ·
+        <a href="mailto:${esc(org.email)}">${esc(org.email)}</a> ·
+        <a href="https://mersis.ticaret.gov.tr/" rel="nofollow noopener" target="_blank">${L === 'tr' ? 'Bilgi Toplumu Hizmetleri' : 'Company registry'}</a>
       </p>
     </div>
   </footer>

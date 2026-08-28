@@ -1,0 +1,179 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Product bands + motion
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Product bands ─────────────────────────────────────────────────
+   data-brand is applied per SECTION here, not on <html>, so the two
+   product worlds can sit next to each other on the company home page
+   while the nav and footer stay parent paper. Same six variables as
+   the page-level theme; nothing else changes. */
+
+.pband {
+  background: var(--surface);
+  color: var(--text-hi);
+  padding-block: var(--e-4);
+  border-top: 1px solid var(--line);
+}
+/* Unequal heights on purpose. Two bands of identical height is the
+   "three identical cards" tell wearing a different hat. */
+.pband:nth-of-type(even) { padding-block: var(--e-3); }
+
+/* Mirrored composition: the second band starts further into the grid,
+   so the page has a rhythm rather than a stack. */
+.pband[data-side="right"] .pband-copy { grid-column: 5 / 12; }
+@media (max-width: 1023px) {
+  .pband[data-side="right"] .pband-copy { grid-column: 1 / -1; }
+}
+
+.pband h2 { margin-top: var(--s-5); max-width: 18ch; }
+.pband p  { margin-top: var(--s-5); color: var(--text-lo); }
+
+.pband-status {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  color: var(--text-lo);
+}
+.pband-index { color: var(--accent); }
+
+/* The status dot is the one continuously moving thing on the page.
+   It means something: a slow pulse for a product that is live, a
+   steady dim dot for one that is still in review. Motion that carries
+   information reads as designed; motion for its own sake reads as a
+   template. */
+.pband-dot {
+  width: 7px; height: 7px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  flex: none;
+}
+[data-brand="chartmind"] .pband-dot {
+  animation: live-pulse 2.4s var(--ease-out) infinite;
+}
+[data-brand="styvora"] .pband-dot { opacity: .45; }
+
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  70%      { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 0%, transparent); }
+}
+
+/* ─── Hover with substance ──────────────────────────────────────────
+   The arrow travels; the rule under the label grows from the left.
+   Both are 160ms and neither moves the element itself — no lift, no
+   shadow, no scale. */
+.cta { position: relative; overflow: hidden; }
+.cta .arr {
+  display: inline-block;
+  transition: transform 160ms var(--ease-out);
+}
+.cta:hover .arr, .cta:focus-visible .arr { transform: translateX(5px); }
+
+.cta::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  height: 2px; width: 100%;
+  background: var(--text-hi);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--ease-out);
+}
+.cta:hover::after, .cta:focus-visible::after { transform: scaleX(1); }
+
+.nav-links a { position: relative; }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px; height: 1px; width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms var(--ease-out);
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a[aria-current="page"] { text-decoration: none; }
+.nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+.log li { transition: background-color var(--d-hover) linear; }
+.log li:hover { background: color-mix(in srgb, var(--text-hi) 4%, transparent); }
+
+/* ─── Entrance ──────────────────────────────────────────────────────
+   The hero is on screen at load, so a scroll-driven reveal never fires
+   for it — which is why the first build had animation wired and yet
+   nothing appeared to move. The hero therefore animates on load, and
+   everything below animates on scroll.
+
+   Both are opt-in behind prefers-reduced-motion, and — importantly —
+   the animations only ever run FROM a hidden state TO the resting
+   state. If they never run at all (old browser, JS-less crawler,
+   reduced motion), the page is already in its finished state. Content
+   is never hidden waiting for motion. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .band .mono,
+  .display,
+  .lead,
+  .band .cta,
+  .spec dl > div {
+    animation: rise 720ms var(--ease-out) backwards;
+  }
+  .display { animation-name: mask-rise; animation-duration: 900ms; }
+
+  /* Staggered, but with an irregular gap — a perfectly even 100ms
+     cascade is a generator's signature. */
+  .band .mono   { animation-delay:  40ms; }
+  .display      { animation-delay: 120ms; }
+  .lead         { animation-delay: 340ms; }
+  .band .cta    { animation-delay: 470ms; }
+  .spec dl > div:nth-child(1) { animation-delay: 300ms; }
+  .spec dl > div:nth-child(2) { animation-delay: 360ms; }
+  .spec dl > div:nth-child(3) { animation-delay: 410ms; }
+  .spec dl > div:nth-child(4) { animation-delay: 455ms; }
+  .spec dl > div:nth-child(5) { animation-delay: 490ms; }
+  .spec dl > div:nth-child(6) { animation-delay: 515ms; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes mask-rise {
+  from { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateY(6px); }
+  to   { opacity: 1; clip-path: inset(0 0 -12% 0); transform: none; }
+}
+
+/* ─── Scroll-driven, for everything below the fold ──────────────────
+   Ranges are set so the animation completes while the element is
+   entering, rather than finishing before it is visible — the defect in
+   the first pass. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .pband .pband-copy > *,
+    section:not(.section-lg) h2,
+    .answer,
+    .facts tbody tr,
+    .log li {
+      animation: rise 700ms var(--ease-out) both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 55%;
+    }
+    .log li:nth-child(odd)  { animation-range: entry 8% entry 58%; }
+
+    .split-rule {
+      animation: draw 900ms linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+      transform-origin: left center;
+    }
+    /* The hero's own split rule has nothing above it to scroll past,
+       so it draws on load instead. */
+    .section-lg + .split-rule {
+      animation: draw 900ms var(--ease-out) 620ms backwards;
+      animation-timeline: auto;
+    }
+  }
+}
+@keyframes draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}

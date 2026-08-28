@@ -1,7 +1,6 @@
 {
   "id": "home",
   "brand": "parent",
-
   "title": {
     "en": "SPACE AI LABS — AI apps built in the open",
     "tr": "SPACE AI LABS — açık şekilde geliştirilen AI uygulamaları"
@@ -10,11 +9,13 @@
     "en": "SPACE AI LABS is an Istanbul software studio building AI mobile apps. ChartMind reads trading charts; Styvora styles you from your own wardrobe.",
     "tr": "SPACE AI LABS, İstanbul merkezli bir yazılım stüdyosu. ChartMind grafik okur, Styvora kendi gardırobunuzdan kombin kurar. İki ürün, tek stüdyo."
   },
-
   "blocks": [
     {
       "type": "hero",
-      "kicker": { "en": "ISTANBUL · SOFTWARE STUDIO", "tr": "İSTANBUL · YAZILIM STÜDYOSU" },
+      "kicker": {
+        "en": "ISTANBUL · SOFTWARE STUDIO",
+        "tr": "İSTANBUL · YAZILIM STÜDYOSU"
+      },
       "h1": {
         "en": "Two apps. Built deeper than they need to be.",
         "tr": "İki uygulama. Gereğinden derin yapıldı."
@@ -24,23 +25,137 @@
         "tr": "SPACE AI LABS kendi AI ürünlerini geliştirir ve işletir. Bu sayfadaki her iddia, açıp bakabileceğiniz bir şeye dayanır: bir mağaza sayfası, bir sicil kaydı ya da uygulamanın kendisi."
       },
       "links": [
-        { "label": { "en": "ChartMind →", "tr": "ChartMind →" }, "href": { "en": "/products/chartmind/", "tr": "/tr/urunler/chartmind/" } },
-        { "label": { "en": "Styvora →", "tr": "Styvora →" }, "href": { "en": "/products/styvora/", "tr": "/tr/urunler/styvora/" } }
+        {
+          "label": {
+            "en": "ChartMind →",
+            "tr": "ChartMind →"
+          },
+          "href": {
+            "en": "/products/chartmind/",
+            "tr": "/tr/urunler/chartmind/"
+          }
+        },
+        {
+          "label": {
+            "en": "Styvora →",
+            "tr": "Styvora →"
+          },
+          "href": {
+            "en": "/products/styvora/",
+            "tr": "/tr/urunler/styvora/"
+          }
+        }
       ],
-      "specLabel": { "en": "Studio facts", "tr": "Stüdyo künyesi" },
+      "specLabel": {
+        "en": "Studio facts",
+        "tr": "Stüdyo künyesi"
+      },
       "spec": [
-        { "k": { "en": "STUDIO",    "tr": "STÜDYO" },   "v": "İstanbul" },
-        { "k": { "en": "PRODUCTS",  "tr": "ÜRÜN" },     "v": "2" },
-        { "k": { "en": "LIVE",      "tr": "YAYINDA" },  "v": "1" },
-        { "k": { "en": "LANGUAGES", "tr": "DİL" },      "v": "39 + 8" },
-        { "k": { "en": "FOUNDED",   "tr": "KURULUŞ" },  "v": "2026" },
-        { "k": { "en": "TEAM",      "tr": "EKİP" },     "v": "1" }
+        {
+          "k": {
+            "en": "STUDIO",
+            "tr": "STÜDYO"
+          },
+          "v": "İstanbul"
+        },
+        {
+          "k": {
+            "en": "PRODUCTS",
+            "tr": "ÜRÜN"
+          },
+          "v": "2"
+        },
+        {
+          "k": {
+            "en": "LIVE",
+            "tr": "YAYINDA"
+          },
+          "v": "1"
+        },
+        {
+          "k": {
+            "en": "LANGUAGES",
+            "tr": "DİL"
+          },
+          "v": "39 + 8"
+        },
+        {
+          "k": {
+            "en": "FOUNDED",
+            "tr": "KURULUŞ"
+          },
+          "v": "2026"
+        },
+        {
+          "k": {
+            "en": "TEAM",
+            "tr": "EKİP"
+          },
+          "v": "1"
+        }
       ]
     },
-
+    {
+      "type": "products",
+      "items": [
+        {
+          "id": "chartmind",
+          "brand": "chartmind",
+          "index": "01",
+          "status": {
+            "en": "LIVE ON BOTH STORES",
+            "tr": "İKİ MAĞAZADA DA YAYINDA"
+          },
+          "h": {
+            "en": "Snap any chart photo. AI reads the pattern, suggests the trade.",
+            "tr": "Grafiğin fotoğrafını çek. Yapay zekâ formasyonu okur, işlemi önerir."
+          },
+          "p": {
+            "en": "Chart analysis, a plain-English screener, and a backtest that names the data feed behind every result. 39 languages, full right-to-left.",
+            "tr": "Grafik analizi, günlük dille kurulan tarayıcı ve her sonucun hangi veri kaynağından geldiğini yazan geriye test. 39 dil, tam sağdan-sola."
+          },
+          "href": {
+            "en": "/products/chartmind/",
+            "tr": "/tr/urunler/chartmind/"
+          },
+          "cta": {
+            "en": "ChartMind",
+            "tr": "ChartMind"
+          }
+        },
+        {
+          "id": "styvora",
+          "brand": "styvora",
+          "index": "02",
+          "status": {
+            "en": "IN APP STORE REVIEW",
+            "tr": "APP STORE İNCELEMESİNDE"
+          },
+          "h": {
+            "en": "Not another shopping app. A stylist that knows you.",
+            "tr": "Bir alışveriş uygulaması daha değil. Seni tanıyan bir stilist."
+          },
+          "p": {
+            "en": "Photograph your wardrobe once. Styvora builds outfits from what you already own and explains why each one works.",
+            "tr": "Gardırobunu bir kez fotoğrafla. Styvora sahip olduğun parçalardan kombin kurar ve her birinin neden çalıştığını anlatır."
+          },
+          "href": {
+            "en": "/products/styvora/",
+            "tr": "/tr/urunler/styvora/"
+          },
+          "cta": {
+            "en": "Styvora",
+            "tr": "Styvora"
+          }
+        }
+      ]
+    },
     {
       "type": "qa",
-      "q": { "en": "What does SPACE AI LABS build?", "tr": "SPACE AI LABS ne yapar?" },
+      "q": {
+        "en": "What does SPACE AI LABS build?",
+        "tr": "SPACE AI LABS ne yapar?"
+      },
       "a": {
         "en": "SPACE AI LABS builds AI-powered mobile apps and runs them end to end — product, backend, models and store operations. Two products exist today: ChartMind, live on the App Store and Google Play, and Styvora, in App Store review.",
         "tr": "SPACE AI LABS, yapay zekâ destekli mobil uygulamalar geliştirir ve baştan sona kendisi işletir: ürün, sunucu tarafı, modeller ve mağaza operasyonu. Bugün iki ürün var: yayında olan ChartMind ve inceleme aşamasındaki Styvora."
@@ -51,9 +166,11 @@
           "tr": "Stüdyo tek kişi. Bunu baştan yazıyoruz çünkü beklentiyi değiştirir: müşteri temsilcisi yok, yol haritası tiyatrosu yok, bir sorunu fark etmekle düzeltmeyi yayınlamak arasındaki mesafe çok kısa."
         }
       ],
-      "note": { "en": "ONE STUDIO · TWO CODEBASES", "tr": "TEK STÜDYO · İKİ KOD TABANI" }
+      "note": {
+        "en": "ONE STUDIO · TWO CODEBASES",
+        "tr": "TEK STÜDYO · İKİ KOD TABANI"
+      }
     },
-
     {
       "type": "qa",
       "q": {
@@ -71,41 +188,12 @@
         }
       ]
     },
-
-    {
-      "type": "facts",
-      "h2": { "en": "You can look us up.", "tr": "Bizi kayıtlardan doğrulayabilirsiniz." },
-      "a": {
-        "en": "SPACE AI LABS YAZILIM HİZMETLERİ LİMİTED ŞİRKETİ is a Turkish limited company registered in İstanbul. Its registry number, tax number and Apple developer identity are published below so any claim on this site can be checked against a public record.",
-        "tr": "SPACE AI LABS YAZILIM HİZMETLERİ LİMİTED ŞİRKETİ, İstanbul'da kayıtlı bir limited şirkettir. Sicil numarası, vergi numarası ve Apple geliştirici kimliği aşağıda yayımlanıyor; böylece sitedeki her iddia bir kamu kaydıyla karşılaştırılabilir."
-      },
-      "rows": [
-        {
-          "k": { "en": "LEGAL ENTITY", "tr": "UNVAN" },
-          "v": "SPACE AI LABS YAZILIM HİZMETLERİ LİMİTED ŞİRKETİ",
-          "verify": { "en": "MERSİS 0781115292100001", "tr": "MERSİS 0781115292100001" }
-        },
-        {
-          "k": { "en": "TAX NUMBER", "tr": "VERGİ NO" },
-          "v": "VKN 7811152921",
-          "verify": { "en": "Türkiye", "tr": "Türkiye" }
-        },
-        {
-          "k": { "en": "APPLE DEVELOPER", "tr": "APPLE GELİŞTİRİCİ" },
-          "v": "Team ID 49CT3A6XH8",
-          "verify": { "en": "App Store seller name matches", "tr": "App Store satıcı adıyla eşleşir" }
-        },
-        {
-          "k": { "en": "REGISTERED OFFICE", "tr": "KAYITLI ADRES" },
-          "v": "Batışehir K Blok No: 2/2, Bağcılar",
-          "verify": { "en": "İstanbul, Türkiye", "tr": "İstanbul, Türkiye" }
-        }
-      ]
-    },
-
     {
       "type": "log",
-      "h2": { "en": "What we shipped recently", "tr": "Son yayınladıklarımız" },
+      "h2": {
+        "en": "What we shipped recently",
+        "tr": "Son yayınladıklarımız"
+      },
       "entries": [
         {
           "date": "2026-08",
@@ -137,11 +225,13 @@
         }
       ]
     },
-
     {
       "type": "prose",
       "tone": "muted",
-      "h2": { "en": "What we don't have", "tr": "Bizde olmayanlar" },
+      "h2": {
+        "en": "What we don't have",
+        "tr": "Bizde olmayanlar"
+      },
       "paras": [
         {
           "en": "No office photos, because there is no office. No customer logos, because we sell to people, not companies. No download counter, because ours is small and inflating it would break the one rule this studio actually has.",

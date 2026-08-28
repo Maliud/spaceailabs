@@ -386,26 +386,125 @@ border-top: 1px solid var(--line);
 padding-top: var(--s-3);
 line-height: 1.6;
 }
+.pband {
+background: var(--surface);
+color: var(--text-hi);
+padding-block: var(--e-4);
+border-top: 1px solid var(--line);
+}
+.pband:nth-of-type(even) { padding-block: var(--e-3); }
+.pband[data-side="right"] .pband-copy { grid-column: 5 / 12; }
+@media (max-width: 1023px) {
+.pband[data-side="right"] .pband-copy { grid-column: 1 / -1; }
+}
+.pband h2 { margin-top: var(--s-5); max-width: 18ch; }
+.pband p  { margin-top: var(--s-5); color: var(--text-lo); }
+.pband-status {
+display: flex;
+align-items: center;
+gap: var(--s-3);
+color: var(--text-lo);
+}
+.pband-index { color: var(--accent); }
+.pband-dot {
+width: 7px; height: 7px;
+border-radius: var(--r-pill);
+background: var(--accent);
+flex: none;
+}
+[data-brand="chartmind"] .pband-dot {
+animation: live-pulse 2.4s var(--ease-out) infinite;
+}
+[data-brand="styvora"] .pband-dot { opacity: .45; }
+@keyframes live-pulse {
+0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+70%      { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 0%, transparent); }
+}
+.cta { position: relative; overflow: hidden; }
+.cta .arr {
+display: inline-block;
+transition: transform 160ms var(--ease-out);
+}
+.cta:hover .arr, .cta:focus-visible .arr { transform: translateX(5px); }
+.cta::after {
+content: "";
+position: absolute;
+left: 0; bottom: -2px;
+height: 2px; width: 100%;
+background: var(--text-hi);
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 220ms var(--ease-out);
+}
+.cta:hover::after, .cta:focus-visible::after { transform: scaleX(1); }
+.nav-links a { position: relative; }
+.nav-links a::after {
+content: "";
+position: absolute;
+left: 0; bottom: -4px; height: 1px; width: 100%;
+background: currentColor;
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 160ms var(--ease-out);
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a[aria-current="page"] { text-decoration: none; }
+.nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+.log li { transition: background-color var(--d-hover) linear; }
+.log li:hover { background: color-mix(in srgb, var(--text-hi) 4%, transparent); }
+@media (prefers-reduced-motion: no-preference) {
+.band .mono,
+.display,
+.lead,
+.band .cta,
+.spec dl > div {
+animation: rise 720ms var(--ease-out) backwards;
+}
+.display { animation-name: mask-rise; animation-duration: 900ms; }
+.band .mono   { animation-delay:  40ms; }
+.display      { animation-delay: 120ms; }
+.lead         { animation-delay: 340ms; }
+.band .cta    { animation-delay: 470ms; }
+.spec dl > div:nth-child(1) { animation-delay: 300ms; }
+.spec dl > div:nth-child(2) { animation-delay: 360ms; }
+.spec dl > div:nth-child(3) { animation-delay: 410ms; }
+.spec dl > div:nth-child(4) { animation-delay: 455ms; }
+.spec dl > div:nth-child(5) { animation-delay: 490ms; }
+.spec dl > div:nth-child(6) { animation-delay: 515ms; }
+}
+@keyframes rise {
+from { opacity: 0; transform: translateY(10px); }
+to   { opacity: 1; transform: none; }
+}
+@keyframes mask-rise {
+from { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateY(6px); }
+to   { opacity: 1; clip-path: inset(0 0 -12% 0); transform: none; }
+}
 @supports (animation-timeline: view()) {
 @media (prefers-reduced-motion: no-preference) {
-h1, h2 {
-animation: mask-reveal var(--d-reveal) var(--ease-out) both;
+.pband .pband-copy > *,
+section:not(.section-lg) h2,
+.answer,
+.facts tbody tr,
+.log li {
+animation: rise 700ms var(--ease-out) both;
 animation-timeline: view();
-animation-range: entry 10% cover 26%;
+animation-range: entry 5% entry 55%;
 }
+.log li:nth-child(odd)  { animation-range: entry 8% entry 58%; }
 .split-rule {
-animation: hairline-draw var(--d-rule) linear both;
+animation: draw 900ms linear both;
 animation-timeline: view();
-animation-range: entry 0% cover 18%;
+animation-range: entry 0% entry 70%;
 transform-origin: left center;
 }
+.section-lg + .split-rule {
+animation: draw 900ms var(--ease-out) 620ms backwards;
+animation-timeline: auto;
 }
 }
-@keyframes mask-reveal {
-from { clip-path: inset(0 0 100% 0); opacity: 0; }
-to   { clip-path: inset(0 0 -10% 0); opacity: 1; }
 }
-@keyframes hairline-draw {
+@keyframes draw {
 from { transform: scaleX(0); }
 to   { transform: scaleX(1); }
 }

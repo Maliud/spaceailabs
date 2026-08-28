@@ -125,35 +125,3 @@ aside.mono {
   padding-top: var(--s-3);
   line-height: 1.6;
 }
-
-/* ─── Motion: two primitives, type and rules only ───────────────────
-   Cards, images and body copy never animate in — they are simply
-   there. That restraint is the loudest confidence signal available,
-   and the exact opposite of the "everything fades up 20px" pattern
-   that identifies a generated site instantly.
-
-   Both are declarative (animation-timeline), so they need no JS and
-   honour prefers-reduced-motion natively. */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    h1, h2 {
-      animation: mask-reveal var(--d-reveal) var(--ease-out) both;
-      animation-timeline: view();
-      animation-range: entry 10% cover 26%;
-    }
-    .split-rule {
-      animation: hairline-draw var(--d-rule) linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 18%;
-      transform-origin: left center;
-    }
-  }
-}
-@keyframes mask-reveal {
-  from { clip-path: inset(0 0 100% 0); opacity: 0; }
-  to   { clip-path: inset(0 0 -10% 0); opacity: 1; }
-}
-@keyframes hairline-draw {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
