@@ -489,9 +489,9 @@ section:not(.section-lg) h2,
 .log li {
 animation: rise 700ms var(--ease-out) both;
 animation-timeline: view();
-animation-range: entry 5% entry 55%;
+animation-range: entry 0% entry 45%;
 }
-.log li:nth-child(odd)  { animation-range: entry 8% entry 58%; }
+.log li:nth-child(odd)  { animation-range: entry 0% entry 50%; }
 .split-rule {
 animation: draw 900ms linear both;
 animation-timeline: view();
@@ -507,4 +507,7 @@ animation-timeline: auto;
 @keyframes draw {
 from { transform: scaleX(0); }
 to   { transform: scaleX(1); }
+}
+@media print {
+*, *::before, *::after { animation: none !important; opacity: 1 !important; }
 }

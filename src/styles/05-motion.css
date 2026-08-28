@@ -155,9 +155,17 @@
     .log li {
       animation: rise 700ms var(--ease-out) both;
       animation-timeline: view();
-      animation-range: entry 5% entry 55%;
+      /* The range MUST finish early in the entry phase. A range that
+         extends into `cover` cannot complete for content near the end
+         of the document — the page simply runs out of scroll — and the
+         element is left permanently part-faded. That happened on the
+         first pass: the last section sat at opacity .15 no matter how
+         far the visitor scrolled. Anything that hides content must be
+         able to un-hide it without requiring scroll that may not
+         exist. */
+      animation-range: entry 0% entry 45%;
     }
-    .log li:nth-child(odd)  { animation-range: entry 8% entry 58%; }
+    .log li:nth-child(odd)  { animation-range: entry 0% entry 50%; }
 
     .split-rule {
       animation: draw 900ms linear both;
@@ -177,3 +185,21 @@
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
 }
+
+/* ─── Safety nets ───────────────────────────────────────────────────
+   Any mechanism that hides content until a condition is met needs a
+   way out for every context where that condition never arrives. */
+
+/* Printing and PDF export never scroll, so scroll-driven reveals would
+   otherwise print blank sections. */
+@media print {
+  *, *::before, *::after { animation: none !important; opacity: 1 !important; }
+}
+
+/* If view() is supported but a timeline never becomes active (an
+   element inside a non-scrolling container, an unusual zoom, a bug),
+   the reveal would hold its hidden start state forever. Forcing the
+   resting state under `scripting: none` is not enough — this is a CSS
+   condition, not a JS one — so the guard is that no rule may reduce
+   opacity outside the @supports block above. Grep test: `opacity: 0`
+   appears in @keyframes only, never as a static declaration. */

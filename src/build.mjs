@@ -45,6 +45,7 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -70,6 +71,7 @@ const DEFAULT_LOCALE = 'en';
    advertise where the site really lives — a preview build must never
    teach a crawler that the sub-path is home. */
 const BASE = (process.env.BASE || '').replace(/\/$/, '');
+let cssPath = '/assets/css/site.css';   // replaced with a hashed name by buildCss()
 const href = (path) => (BASE && path.startsWith('/') ? BASE + path : path);
 
 /* ─── Helpers ─────────────────────────────────────────────────────── */
@@ -308,7 +310,7 @@ function head(page, L) {
 
   <link rel="preload" href="${href('/assets/fonts/fraunces-var.woff2')}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="${href('/assets/fonts/instrument-var.woff2')}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="${href('/assets/css/site.css')}">
+  <link rel="stylesheet" href="${href(cssPath)}">
 </head>`;
 }
 
@@ -399,7 +401,17 @@ function buildCss() {
     .replace(/\s*\n\s*/g, '\n')
     .replace(/\n{2,}/g, '\n')
     .trim();
-  return write('assets/css/site.css', min);
+  // Content hash in the filename: a deploy is visible immediately
+  // instead of hiding behind a stale cached stylesheet — which cost a
+  // full review cycle the first time — and the file can then be cached
+  // forever.
+  const hash = createHash('sha256').update(min).digest('hex').slice(0, 8);
+  cssPath = `/assets/css/site.${hash}.css`;
+  for (const f of readdirSync(join(ROOT, 'assets/css'), { withFileTypes: true })
+        .filter((d) => d.isFile() && d.name.endsWith('.css'))) {
+    rmSync(join(ROOT, 'assets/css', f.name));
+  }
+  return write(cssPath.slice(1), min);
 }
 
 function buildSitemap(pages) {
@@ -427,6 +439,8 @@ function main() {
   const pages = readdirSync(pageDir).filter((f) => f.endsWith('.json'))
     .map((f) => JSON.parse(readFileSync(join(pageDir, f), 'utf8')));
 
+  written.push(buildCss());          // before pages: <head> needs the hashed name
+
   for (const page of pages) {
     if (!site.routes[page.id]) throw new Error(`No route for page "${page.id}"`);
     for (const L of LOCALES) {
@@ -435,7 +449,6 @@ function main() {
     }
   }
 
-  written.push(buildCss());
   written.push(buildSitemap(pages));
   written.push(write('.nojekyll', ''));
 
